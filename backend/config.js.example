@@ -1,0 +1,42 @@
+module.exports = {
+  port: 3000,
+  corsOrigin: 'http://localhost:5173',
+
+  mongo: {
+    connectionString: 'mongodb://USER:PASSWORD@localhost:27017/admin',
+  },
+
+  turnstile: {
+    url: 'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+  },
+
+  itemTypes: [
+    {
+      type: 'person',
+      attributes: {
+        first_name: 'string',
+        last_name: 'string',
+        phone: 'number',
+        email: 'string'
+      },
+      captcha: {
+        type: 'turnstile',
+        secret_key: 'SECRET_KEY'
+      }
+    },
+    
+    {
+      type: 'address',
+      attributes: {
+        street: 'string',
+        street_nr: 'number',
+        city: 'string',
+        psc: 'number'
+      },
+      captcha: {
+        type: 'turnstile',
+        secret_key: 'SECRET_KEY'
+      }
+    }
+  ]
+};
