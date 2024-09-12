@@ -1,10 +1,13 @@
 <template>
   <div>
     <div v-if="loading">Loading...</div>
-    <div v-if="error">{{ error }}</div>
-    <div v-if="itemTypes && itemTypes.length">
+    <div v-else-if="error">{{ error }}</div>
+    <div v-else-if="hasItems">
       <strong>Items:</strong>
-      <a v-for="item in itemTypes" :key="item" href="#" @click.prevent="menuItemClick(item)">
+      <a v-for="item in itemTypes" 
+        :key="item" 
+        href="#" @click.prevent="menuItemClick(item)"
+      >
         <strong>{{ item }}</strong>
       </a>
     </div>
@@ -26,6 +29,11 @@ export default {
   created() {
     this.fetchItemTypes()
   },
+  computed: {
+    hasItems() {
+      return this.itemTypes && this.itemTypes.length > 0;
+    }
+  },
   methods: {
     async fetchItemTypes() {
       this.loading = true
@@ -44,4 +52,3 @@ export default {
   }
 }
 </script>
-

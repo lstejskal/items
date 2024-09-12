@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="submitForm">
     <div>
-      <p>TYPE: {{ itemType }}</p>
+      <p>Item type: {{ itemType }}</p>
     </div>
 
     <div v-if="loading">Loading...</div>
@@ -20,7 +20,7 @@
 
     <div id="turnstile-widget"></div>
 
-    <button type="submit">Submit</button>
+    <button type="submit">Add item</button>
   </form>
 </template>
 
@@ -68,7 +68,7 @@ export default defineComponent({
       }
     }
 
-    // Form submission method
+    // form submission method
     const submitForm = async () => {
       loading.value = true
       error.value = null
@@ -84,11 +84,6 @@ export default defineComponent({
           turnstile_token: turnstileToken.value
         }
 
-        console.log('itemAttributes: ', itemAttributes)
-
-        console.log('form.value: ', form.value)
-
-        // Object.keys(itemAttributes).forEach((key) => {
         for (const key in itemAttributes.value) {
           if (form.value[key]) {
             formPayload[key] = form.value[key]
